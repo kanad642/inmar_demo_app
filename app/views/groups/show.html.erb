@@ -18,14 +18,14 @@
     </tbody>
   </table>
 
-  <%= form_tag("/groups/#{@group.try(:id)}/add_contact_to_group", method: "post") do %>
-    <div class="form-group">
-      <%= select_tag "contact", options_from_collection_for_select(Contact.all, "id", "name"), prompt: "Select contact", class: "form-control" %>
-    </div>
-    <div class="actions form-group">
-      <%= submit_tag "Submit", class: "btn btn-primary" %>
-    </div>
-  <% end -%>
+
+  <div class="col-lg-12 pull-left">
+    <%= link_to 'New Contact', new_group_contact_path %>
+  </div>
+
+
+
+
 
   <table class="table table-striped">
     <h3>Contact Details</h3>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :contacts
+  resources :group_contacts
   resources :groups do
     get 'update_status'
     post 'add_contact_to_group'
