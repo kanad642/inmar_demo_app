@@ -1,13 +1,41 @@
-<table class="table table-striped">
-  <h3>Group Details</h3>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
+<% if @group.present? %>
+  <table class="table table-striped">
+    <h3>Group Details</h3>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <tr>
+        <td><%= @group.name %></td>
+        <td><%= @group.status %></td>
+        <td><%= link_to 'Edit', edit_group_path(@group) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= form_tag("/groups/#{@group.try(:id)}/add_contact_to_group", method: "post") do %>
+    <div class="form-group">
+      <%= select_tag "contact", options_from_collection_for_select(Contact.all, "id", "name"), prompt: "Select contact", class: "form-control" %>
+    </div>
+    <div class="actions form-group">
+      <%= submit_tag "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end -%>
+
+  <table class="table table-striped">
+    <h3>Contact Details</h3>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
   <tbody>
     <tr>
       <td><%= @group.name %></td>
@@ -15,24 +43,8 @@
       <td><%= link_to 'Edit', edit_group_path(@group) %></td>
     </tr>
   </tbody>
-</table>
+  </table>
 
-
-<table class="table table-striped">
-  <h3>Contact Details</h3>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= @group.name %></td>
-      <td><%= @group.status %></td>
-      <td><%= link_to 'Edit', edit_group_path(@group) %></td>
-    </tr>
-  </tbody>
-</table>
+<% else %>
+  <h3>No Data Found</h3>
+<% end %>

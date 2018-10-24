@@ -3,9 +3,10 @@ class CreateContacts < ActiveRecord::Migration[5.0]
     create_table :contacts do |t|
       t.string :name
       t.string :email
-      t.integer :phone
+      t.string :phone
       t.boolean :status,   null: false, default: true
-      t.integer :group_id
+      t.string :group_id
+      t.integer :user_id
 
       t.timestamps
     end

@@ -5,10 +5,9 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     #@groups = Group.all
-    @active_groups = Group.where(status: true)
-    @inactive_groups = Group.where(status: false)
-    # binding.pry
-
+    groups = current_user.groups
+    @active_groups = groups.where(status: true)
+    @inactive_groups = groups.where(status: false)
   end
 
   # GET /groups/1
@@ -32,7 +31,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to groups_path, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -71,10 +70,22 @@ class GroupsController < ApplicationController
     redirect_to groups_url, notice: 'Group was successfully updated.'
   end
 
+  def add_contact_to_group
+    #binding.pry
+    #group = Group.find_by(id: params[:group_id])
+    group_ids = []
+    contact = Contact.find_by(id: params[:contact])
+    group_ids << contact.group_id
+    group_ids <<  params[:group_id]
+    contact.update_attributes(group_id: "#{group_ids.compact.uniq}")
+
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

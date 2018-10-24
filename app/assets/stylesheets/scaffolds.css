@@ -88,7 +88,26 @@ label {
   display: block;
 }
 
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #bfe0fd;
+   text-align: center;
+   padding: 1px 0px 1px 0px;
+}
 
-.right{
-  float: right;
+.navbar-default {
+    background-color: #bfe0fd;
+    border-color: #e7e7e7;
+}
+
+.padding-15{
+  padding: 15px 15px 15px 15px;
+}
+
+.col-6-background{
+    background-color: #eee;
+    padding: 10px 15px 8px 15px;
 }

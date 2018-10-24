@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 20181023145642) do
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "phone"
+    t.string   "phone"
     t.boolean  "status",     default: true, null: false
-    t.integer  "group_id"
+    t.string   "group_id"
+    t.integer  "user_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :contacts
   resources :groups do
     get 'update_status'
+    post 'add_contact_to_group'
   end
   devise_for :users
   root to: 'home#index'
