@@ -56,4 +56,8 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['JAWSDB_URL'] %>
+  database: katswl28ntprq69n
+  username: kvrrddupbkbwrh2f
+  password: jg7or5jxcf3qcygz
+  host: u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  timeout: 5000
