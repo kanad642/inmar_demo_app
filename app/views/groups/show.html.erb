@@ -1,79 +1,84 @@
-<div class="col-lg-2"></div>
-<div class="col-lg-8">
+<div class="col-lg-1"></div>
+<div class="col-lg-10 inner-box">
   <table class="table table-striped">
-    <h3>Group Details</h3>
-    <%= link_to 'Back', groups_path, class: "pull-right btn btn-primary" %>
-    <%= link_to 'New Contact', new_group_contact_path(group_id: @group.id), class: "pull-right btn btn-primary marginRight10" %>
+    <div class="center-h3"> Group Details </div>
+    <% if @group.present? %>
+      <%= link_to 'Back', groups_path, class: "pull-right btn btn-primary" %>
+      <%= link_to 'New Contact', new_group_contact_path(group_id: @group.try(:id)), class: "pull-right btn btn-primary marginRight10" %>
 
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td><%= capitalize(@group.name) %></td>
-        <td><%= @group.status %></td>
-        <td><%= link_to 'Edit', edit_group_path(@group) %></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <%= form_tag search_group_contacts_groups_path, :method => :get do %>
-    <div id="custom-search-input">
-      <div class="input-group col-md-12">
-        <input type="text" class="search-query form-control" placeholder="Search Contact by Name/Mobile/Email/Status" name="search_element" />
-        <input type="hidden" class="search-query form-control" placeholder="Search Group" name="group_id" value= "<%= @group.id%>"/>
-        <span class="input-group-btn">
-          <button class="btn btn-danger" type="submit">
-          <span class=" glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-      </div>
-    </div>
-    <input  name="search_field" type="radio" value="name" checked="checked"/> Name
-    <input  name="search_field" type="radio" value="email"/> Email
-    <input  name="search_field" type="radio" value="phone"/> Phone
-    <input  name="search_field" type="radio" value="status"/> Status
-  <% end%>
-
-  <div class="contact-details-field">
-   <table class="table table-striped">
-    <h3> Contact</h3>
       <thead>
         <tr>
           <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
           <th>Status</th>
-          <th>Change Status</th>
-          <th>Action</th>
+          <th></th>
         </tr>
       </thead>
+
       <tbody>
-        <% @group_contacts.each do |group_contact|%>
-          <tr>
-            <td><%= capitalize(group_contact.name) %></td>
-            <td><%= group_contact.email %></td>
-            <td><%= group_contact.phone %></td>
-            <td><%= group_contact.status %></td>
-            <td>
-              <% if group_contact.status.eql?("Active") %>
-                <%= link_to 'Inactive', group_contact_update_status_path(group_contact_id: group_contact.id, status: "Inactive") %>
-              <% else %>
-                <%= link_to 'Active', group_contact_update_status_path(group_contact_id: group_contact.id, status: "Active") %>
-              <%end%>
-            </td>
-            <td><%= link_to 'Edit', edit_group_contact_path(group_contact) %> | <%= link_to 'Destroy', group_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= capitalize(@group.name) %></td>
+          <td><%= @group.status %></td>
+          <td><%= link_to 'Edit', edit_group_path(@group) %></td>
+        </tr>
       </tbody>
     </table>
+
+
+    <%= form_tag search_group_contacts_groups_path, :method => :get do %>
+      <div id="custom-search-input">
+        <div class="input-group col-md-12">
+          <input type="text" class="search-query form-control" placeholder="Search Contact by Name/Mobile/Email/Status" name="search_element" />
+          <input type="hidden" class="search-query form-control" placeholder="Search Group" name="group_id" value= "<%= @group.id%>"/>
+          <span class="input-group-btn">
+            <button class="btn btn-danger" type="submit">
+            <span class=" glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+      <input  name="search_field" type="radio" value="name" checked="checked"/> Name
+      <input  name="search_field" type="radio" value="email"/> Email
+      <input  name="search_field" type="radio" value="phone"/> Phone
+      <input  name="search_field" type="radio" value="status"/> Status
+    <% end%>
+
+    <div class="contact-details-field">
+     <table class="table table-striped">
+      <div class="center-h3"> Contact Details </div>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Change Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group_contacts.each do |group_contact|%>
+            <tr>
+              <td><%= capitalize(group_contact.name) %></td>
+              <td><%= group_contact.email %></td>
+              <td><%= group_contact.phone %></td>
+              <td><%= capitalize(group_contact.status) %></td>
+              <td>
+                <% if group_contact.status.eql?("active") %>
+                  <%= link_to 'Inactive', group_contact_update_status_path(group_contact_id: group_contact.id, status: "inactive") %>
+                <% else %>
+                  <%= link_to 'Active', group_contact_update_status_path(group_contact_id: group_contact.id, status: "active") %>
+                <%end%>
+              </td>
+              <td><%= link_to 'Edit', edit_group_contact_path(group_contact) %> | <%= link_to 'Destroy', group_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    <%= will_paginate @group_contacts, renderer: BootstrapPagination::Rails, previous_label: "Previous", next_label: "Next"   %>
+    <%else%>
+      <div class="center-h3"> No record Found ! </div>
+    <% end %>
   </div>
 
 </div>
-<div class="col-lg-2"></div>
+<div class="col-lg-1"></div>

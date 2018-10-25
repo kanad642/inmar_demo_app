@@ -29,19 +29,19 @@
           <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
         <% end %>
         </p>
-
+        <% if user_signed_in? %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Groups", groups_path  %></li>
-            <li><%= link_to "Contact", group_contacts_path  %></li>
           </ul>
         </div>
+        <% end %>
       </div>
     </div>
 
     <div class="container margin-top-100">
       <div class="row">
-        <div class="col-lg-12 padding-15 col-6-background">
+        <div class="col-lg-12 col-6-background">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

@@ -1,4 +1,4 @@
-$(window).load(function() {
+$(document).ready(function(){
   console.log("Inside Custome.js");
   submite_button = false;
   // Validate Email
@@ -108,6 +108,5 @@ $(window).load(function() {
       }
     });
   }
-
 
 });
