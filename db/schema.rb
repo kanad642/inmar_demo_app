@@ -16,22 +16,22 @@ ActiveRecord::Schema.define(version: 20181024213144) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.boolean  "status",     default: true, null: false
+    t.string   "status",     default: "Active"
     t.integer  "group_id"
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["group_id"], name: "index_group_contacts_on_group_id", using: :btree
     t.index ["user_id"], name: "index_group_contacts_on_user_id", using: :btree
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.boolean  "status",                   default: true, null: false
+    t.string   "status",                   default: "Active"
     t.integer  "user_id"
     t.text     "group_desp", limit: 65535
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

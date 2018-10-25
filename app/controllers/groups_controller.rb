@@ -4,19 +4,14 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    #@groups = Group.all
-    groups = current_user.groups
-    @active_groups = groups.where(status: true)
-    @inactive_groups = groups.where(status: false)
+    @groups = current_user.groups
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
     @group = Group.find_by(id: params[:id], user_id: current_user.id)
-    @active_group_contacts = @group.present? ? @group.group_contacts.where(status: true) : []
-    @inactive_group_contacts = @group.present? ? @group.group_contacts.where(status: false) : []
-
+    @group_contacts = @group.present? ? @group.group_contacts : []
   end
 
   # GET /groups/new
@@ -32,14 +27,11 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
     respond_to do |format|
       if @group.save
         format.html { redirect_to groups_path, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,10 +42,8 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
-        format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,7 +54,6 @@ class GroupsController < ApplicationController
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -72,6 +61,19 @@ class GroupsController < ApplicationController
     group = Group.find_by(id: params[:group_id])
     group.update_attributes(status: params[:status]) if group.present?
     redirect_to groups_url, notice: 'Group was successfully updated.'
+  end
+
+  # To search group
+  def search_group
+    @groups = Group.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
+    render :index
+  end
+
+  # To search group Contact
+  def search_group_contacts
+    @group = Group.find_by(id: params[:group_id])
+    @group_contacts = @group.group_contacts.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
+    render :show
   end
 
 

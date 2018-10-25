@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :first_name,  presence: true
   validates :last_name, presence: true
-  validates :aadhar, presence: true
+  validates :aadhar, presence: true, uniqueness: {  message: "Already taken chose different one!" }
   validates :mobile, presence: true
   validates :email, confirmation: { case_sensitive: false }, format: { with: /\@inmar.com\z/,
     message: "Email must be from @inmar.com" }

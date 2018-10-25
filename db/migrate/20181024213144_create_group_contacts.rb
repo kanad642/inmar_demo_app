@@ -4,7 +4,7 @@ class CreateGroupContacts < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :email
       t.string :phone
-      t.boolean :status, null: false, default: true
+      t.string :status, default: "Active"
       t.integer :group_id, index: true
       t.integer :user_id, index: true
       t.timestamps

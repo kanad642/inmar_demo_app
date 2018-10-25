@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :groups do
     get 'update_status'
     post 'add_contact_to_group'
+    collection do
+      get 'search_group'
+      get 'search_group_contacts'
+    end
   end
   devise_for :users
   root to: 'home#index'

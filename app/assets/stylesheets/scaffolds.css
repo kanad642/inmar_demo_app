@@ -54,7 +54,6 @@ div {
 }
 
 #error_explanation {
-  width: 450px;
   border: 2px solid red;
   padding: 7px;
   padding-bottom: 0;
@@ -99,4 +98,25 @@ label {
 .margin-top-100{
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.contact-details-field{
+  border: 1px solid #9ca6ad;
+  padding: 10px;
+  margin-top: 10px;
+}
+ h3{
+  border: 1px solid #9ca6ad;
+  padding: 10px;
+  background: #cdd5e6;
+  font-size: 20px;
+}
+
+.group-data-container {
+    border: 1px solid #9ca6ad;
+    margin-top: 20px;
+}
+
+.marginRight10{
+  margin-right: 10px;
 }
