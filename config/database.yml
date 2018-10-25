@@ -53,10 +53,7 @@ test:
 #   username: inmar_test
 #   password: <%= ENV['INMAR_TEST_DATABASE_PASSWORD'] %>
 
+
 production:
   <<: *default
-  database: katswl28ntprq69n
-  username: kvrrddupbkbwrh2f
-  password: jg7or5jxcf3qcygz
-  host: u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-  timeout: 5000
+  url: <%= ENV['JAWSDB_URL'] %>

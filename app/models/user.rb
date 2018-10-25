@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :aadhar, presence: true
   validates :mobile, presence: true
-  validates :email, confirmation: { case_sensitive: false }
-  has_many :contacts
+  validates :email, confirmation: { case_sensitive: false }, format: { with: /\@inmar.com\z/,
+    message: "Email must be from @inmar.com" }
   has_many :groups
 end

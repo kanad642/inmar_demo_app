@@ -1,6 +1,9 @@
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
 <% if @group.present? %>
   <table class="table table-striped">
     <h3>Group Details</h3>
+    <%= link_to 'New Contact', new_group_contact_path(group_id: @group.id), class: "pull-right btn btn-primary" %>
     <thead>
       <tr>
         <th>Name</th>
@@ -18,33 +21,62 @@
     </tbody>
   </table>
 
+  <br>
+  <br>
 
-  <div class="col-lg-12 pull-left">
-    <%= link_to 'New Contact', new_contact_path %>
-  </div>
+   <table class="table table-striped">
+    <h3>Active Contact</h3>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Change Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @active_group_contacts.each do |group_contact|%>
+          <tr>
+            <td><%= group_contact.name %></td>
+            <td><%= group_contact.email %></td>
+            <td><%= group_contact.phone %></td>
+            <td><%= status(group_contact.status) %></td>
+            <td><%= link_to 'Inactive', group_contact_update_status_path(group_contact_id: group_contact.id, status: false) %></td>
+            <td><%= link_to 'Edit', edit_group_contact_path(group_contact) %> | <%= link_to 'Destroy', group_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-
-
-
-
-  <table class="table table-striped">
-    <h3>Contact Details</h3>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-  <tbody>
-    <tr>
-      <td><%= @group.name %></td>
-      <td><%= @group.status %></td>
-      <td><%= link_to 'Edit', edit_group_path(@group) %></td>
-    </tr>
-  </tbody>
-  </table>
-
+    <table class="table table-striped">
+      <h3>Inactive Group</h3>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Change Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inactive_group_contacts.each do |group_contact| %>
+          <tr>
+            <td><%= group_contact.name %></td>
+            <td><%= group_contact.email %></td>
+            <td><%= group_contact.phone %></td>
+            <td><%= status(group_contact.status) %></td>
+            <td><%= link_to 'Active', group_contact_update_status_path(group_contact_id: group_contact.id, status: true) %></td>
+            <td><%= link_to 'Edit', edit_group_contact_path(group_contact) %> | <%= link_to 'Destroy', group_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 <% else %>
   <h3>No Data Found</h3>
 <% end %>
+</div>
+<div class="col-lg-2"></div>

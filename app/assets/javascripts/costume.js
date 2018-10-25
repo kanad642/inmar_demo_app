@@ -1,5 +1,5 @@
-$(document).ready(function() {
-
+$(window).load(function() {
+  console.log("Inside Custome.js");
   submite_button = false;
   // Validate Email
   function checkEmail(email) {
@@ -28,15 +28,14 @@ $(document).ready(function() {
     }
   });
 
-  var pwd    = $('#user_password');
+  var pwd         = $('#user_password');
   var conf_pwd    = $('#user_password_confirmation');
-  var pwdIdSet  = $('#setPasswordMessage');
+  var pwdIdSet    = $('#setPasswordMessage');
 
   setCheckPasswordStrength(pwd,conf_pwd,pwdIdSet);
 
   function setCheckPasswordStrength(pwd, conf_pwd, pwdIdSet)
   {
-
     submit_button_status =  false;
     upperCase = new RegExp('[A-Z]');
     lowerCase = new RegExp('[a-z]');

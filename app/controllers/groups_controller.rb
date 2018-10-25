@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:edit, :update, :destroy]
 
   # GET /groups
   # GET /groups.json
@@ -13,6 +13,10 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @group = Group.find_by(id: params[:id], user_id: current_user.id)
+    @active_group_contacts = @group.present? ? @group.group_contacts.where(status: true) : []
+    @inactive_group_contacts = @group.present? ? @group.group_contacts.where(status: false) : []
+
   end
 
   # GET /groups/new
@@ -70,22 +74,12 @@ class GroupsController < ApplicationController
     redirect_to groups_url, notice: 'Group was successfully updated.'
   end
 
-  def add_contact_to_group
-    #binding.pry
-    #group = Group.find_by(id: params[:group_id])
-    group_ids = []
-    contact = Contact.find_by(id: params[:contact])
-    group_ids << contact.group_id
-    group_ids <<  params[:group_id]
-    contact.update_attributes(group_id: "#{group_ids.compact.uniq}")
-
-
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find_by(id: params[:id])
+      redirect_to root_path, notice: "Data not found" unless @group.present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

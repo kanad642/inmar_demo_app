@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def group_status(status)
+  def status(status)
     status ? "Active" : "Inactive"
   end
 

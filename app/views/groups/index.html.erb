@@ -15,7 +15,7 @@
         <% @active_groups.each do |group| %>
           <tr>
             <td><%= link_to "#{group.name}", group %></td>
-            <td><%= group_status(group.status) %></td>
+            <td><%= status(group.status) %></td>
             <td><%= link_to 'Edit', edit_group_path(group) %></td>
             <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <td><%= link_to 'Inactive', group_update_status_path(group_id: group.id, status: false) %></td>
@@ -37,8 +37,8 @@
       <tbody>
         <% @inactive_groups.each do |group| %>
           <tr>
-            <td><%= link_to "#{group.name}", group %></td>
-            <td><%= group_status(group.status) %></td>
+            <td><%= group.name %></td>
+            <td><%= status(group.status) %></td>
             <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <td><%= link_to 'Active', group_update_status_path(group_id: group.id, status: true) %></td>
           </tr>
