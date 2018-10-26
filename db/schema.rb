@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20181024213144) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "status",     default: "Active"
+    t.string   "status",     default: "active"
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at",                    null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20181024213144) do
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.string   "status",                   default: "Active"
+    t.string   "status",                   default: "active"
     t.integer  "user_id"
     t.text     "group_desp", limit: 65535
     t.datetime "created_at",                                  null: false

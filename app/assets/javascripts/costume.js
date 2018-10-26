@@ -1,5 +1,4 @@
-$(document).ready(function(){
-  console.log("Inside Custome.js");
+$(window).on('load', function() {
   submite_button = false;
   // Validate Email
   function checkEmail(email) {
@@ -19,6 +18,7 @@ $(document).ready(function(){
   };
 
   $("#user_email").bind('input', function(){
+
     if (checkEmail($("#user_email").val())){
       submite_button = true;
       button_enable();
