@@ -120,19 +120,21 @@ h3{
   font-size: 20px;
 }
 
-.group-data-container {
+.group-data-container, .contact-details-field {
     border: 1px solid #9ca6ad;
     margin-top: 20px;
     border-radius: 6px;
     padding: 10px;
+    overflow-x: scroll;
 }
 
-.contact-details-field {
+/*.contact-details-field {
     border: 1px solid #9ca6ad;
     margin:  30px 0px 30px 0px;
     border-radius: 6px;
     padding: 10px;
-}
+    overflow-x: scroll;
+}*/
 
 .marginRight10{
   margin-right: 10px;
@@ -157,4 +159,17 @@ h3{
     text-align: center;
     border-radius: 7px;
     margin: 20px 0px 20px 0px;
+}
+
+@media (max-width: 600px) {
+  .col-6-background {
+      background-color: #eee;
+      padding: 20px 20px 20px 20px;
+      border: 1px solid silver;
+      min-height: 300px;
+      height: auto;
+      box-shadow: 0 2px 2px 0;
+      border-radius: 25px;
+      margin: 40px 5px 0px 5px;
+  }
 }
