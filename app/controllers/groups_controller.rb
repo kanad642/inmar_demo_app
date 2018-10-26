@@ -66,10 +66,11 @@ class GroupsController < ApplicationController
   # To search group
   def search_group
     if params[:search_field].eql?("status") && params[:search_field].present?
-      @groups = current_user.groups.where(status: params[:search_element].downcase)
+      groups = current_user.groups.where(status: params[:search_element].downcase)
     else
-      @groups = current_user.groups.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
+      groups = current_user.groups.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
     end
+    @groups = groups.paginate(:page => params[:page], :per_page => 5)
     render :index
   end
 
@@ -77,10 +78,11 @@ class GroupsController < ApplicationController
   def search_group_contacts
     @group = Group.find_by(id: params[:group_id])
     if params[:search_field].eql?("status") && params[:search_field].present?
-      @group_contacts = @group.group_contacts.where(status: params[:search_element].downcase)
+      group_contacts = @group.group_contacts.where(status: params[:search_element].downcase)
     else
-      @group_contacts = @group.group_contacts.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
+      group_contacts = @group.group_contacts.where("#{params[:search_field]} LIKE ? ", "%#{params[:search_element]}%")
     end
+    @group_contacts = group_contacts.paginate(:page => params[:page], :per_page => 5)
     render :show
   end
 
