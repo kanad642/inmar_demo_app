@@ -4,14 +4,14 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = current_user.groups.paginate(:page => params[:page], :per_page => 3)
+    @groups = current_user.groups.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
     @group = Group.find_by(id: params[:id], user_id: current_user.id)
-    @group_contacts = @group.present? ? @group.group_contacts.paginate(:page => params[:page], :per_page => 3) : []
+    @group_contacts = @group.present? ? @group.group_contacts.paginate(:page => params[:page], :per_page => 5) : []
   end
 
   # GET /groups/new
