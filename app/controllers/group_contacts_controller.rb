@@ -45,7 +45,7 @@ class GroupContactsController < ApplicationController
   private
 
   def set_group_contact
-    @group_contact = GroupContact.find(params[:id])
+    @group_contact = GroupContact.find_by(id: params[:id], user_id: current_user.id)
     redirect_to root_path, notice: "Data not found" unless @group_contact.present?
   end
 

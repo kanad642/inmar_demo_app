@@ -90,7 +90,7 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find_by(id: params[:id])
+      @group = Group.find_by(id: params[:id], user_id: current_user)
       redirect_to root_path, notice: "Data not found" unless @group.present?
     end
 
